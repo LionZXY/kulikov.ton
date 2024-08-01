@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+
+  reverse-proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile.reverse-proxy
+    network_mode: 'host'
+    volumes:
+      - ./config.json:/reverse-proxy/config.json
+    depends_on:
+      - nginx
