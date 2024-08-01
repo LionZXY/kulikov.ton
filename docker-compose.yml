@@ -10,8 +10,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.reverse-proxy
-    network_mode: 'host'
+    ports:
+      - 12338:12338/udp
     volumes:
       - ./config.json:/reverse-proxy/config.json
     depends_on:
-      - nginx
+      - frontend
